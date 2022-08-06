@@ -1,16 +1,6 @@
-async function a () {
-	let header = {
-		'Access-Control-Allow-Origin': '*',
-		'Content-Type': 'application/json',
-	}
-	const res = await axios.get('https://api.secretspage.com/api/user?lnk=admin',header )
-	console.log(res)
 
-	const name = res.data.name
-	const date = res.data.date
-	const message = res.data.message
-} 
-a();
+
+
 
 
 

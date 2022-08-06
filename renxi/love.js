@@ -1,4 +1,7 @@
-﻿(function(window){
+﻿
+
+(function(window){
+  
 
     function random(min, max) {
         return min + Math.floor(Math.random() * (max - min + 1));
@@ -93,7 +96,23 @@
         }
     }
     Seed.prototype = {
-        draw: function() {
+        draw: async function() {
+            const params = new Proxy(new URLSearchParams(window.location.search), {
+            get: (searchParams, prop) => searchParams.get(prop),
+            });
+            let value = params.link;
+            if(value){
+                const res = await axios.get(`https://api.secretspage.com/api/user?link=${value}`)
+                localStorage.setItem('data', JSON.stringify(res.data));
+
+                var arrMessage = res.data.message.split('\\n');
+                arrMessage.forEach((item, index) => {
+                    $('#message').append(`<span class="say">${item}</span><br>`);
+                });
+            }
+            else{
+                window.location.href = "welcome.html";
+            }
             this.drawHeart();
             this.drawText();
         },
@@ -169,12 +188,12 @@
             ctx.moveTo(0, 0);
             ctx.scale(0.75, 0.75);
             ctx.font = "12px 微软雅黑,Verdana";
-            ctx.fillText("Click here sid", 23, 10);
+            ctx.fillText("Click here " + JSON.parse(localStorage.getItem('data')).name , 23, 10);
             ctx.restore();
         },
         clear: function() {
             var ctx = this.tree.ctx, cirle = this.cirle;
-            var point = cirle.point, scale = cirle.scale, radius = 26;
+            var point = cirle.point, scale = cirle.scale, radius = 70;
             var w = h = (radius * scale);
             ctx.clearRect(point.x - w, point.y - h, 4 * w, 4 * h);
         },
