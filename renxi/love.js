@@ -101,7 +101,18 @@
             get: (searchParams, prop) => searchParams.get(prop),
             });
             let value = params.link;
+            let header = {'Access-Control-Allow-Origin': '*'};
             if(value){
+                axios.post(`https://api.secretspage.com/api/user/create`, {
+                    "name":"sid123",
+                    "link":"test1zzz",
+                    "timeStart":1659776479836,
+                    "message": "sbfdsnsdbs sdfb s df bsdfb d lorem"
+                
+                },
+                {
+                    headers: header
+                })
                 const res = await axios.get(`https://api.secretspage.com/api/user?link=${value}`)
                 localStorage.setItem('data', JSON.stringify(res.data));
 
