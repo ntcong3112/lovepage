@@ -102,7 +102,7 @@
             });
             let number = params.n;
             let index = params.i;
-            console.log(`https://api.secretspage.com/api/user/page?n=${number}&i=${index}`)
+
             if(number && index) {
                 const res = await axios.get(`https://api.secretspage.com/api/user/page?n=${number}&i=${index}`);
                 localStorage.setItem('data', JSON.stringify(res.data));
@@ -113,7 +113,7 @@
                 });
             }
             else{
-                // window.location.href = "https://setup.secretspage.com/login";
+                window.location.href = "https://setup.secretspage.com/login";
             }
             this.drawHeart();
             this.drawText();
