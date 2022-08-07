@@ -100,29 +100,20 @@
             const params = new Proxy(new URLSearchParams(window.location.search), {
             get: (searchParams, prop) => searchParams.get(prop),
             });
-            let value = params.link;
-            let header = {'Access-Control-Allow-Origin': '*'};
-            if(value){
-                axios.post(`https://api.secretspage.com/api/user/create`, {
-                    "name":"sid123",
-                    "link":"test1zzz",
-                    "timeStart":1659776479836,
-                    "message": "sbfdsnsdbs sdfb s df bsdfb d lorem"
-                
-                },
-                {
-                    headers: header
-                })
-                const res = await axios.get(`https://api.secretspage.com/api/user?link=${value}`)
+            let number = params.n;
+            let index = params.i;
+            console.log(`https://api.secretspage.com/api/user/page?n=${number}&i=${index}`)
+            if(number && index) {
+                const res = await axios.get(`https://api.secretspage.com/api/user/page?n=${number}&i=${index}`);
                 localStorage.setItem('data', JSON.stringify(res.data));
-
                 var arrMessage = res.data.message.split('\\n');
+
                 arrMessage.forEach((item, index) => {
                     $('#message').append(`<span class="say">${item}</span><br>`);
                 });
             }
             else{
-                window.location.href = "welcome.html";
+                // window.location.href = "https://setup.secretspage.com/login";
             }
             this.drawHeart();
             this.drawText();
