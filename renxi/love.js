@@ -113,7 +113,7 @@
                 });
             }
             else{
-                window.location.href = "https://setup.secretspage.com/login";
+                window.location.href = "https://setup.secretspage.com";
             }
             this.drawHeart();
             this.drawText();
