@@ -106,8 +106,7 @@
             if(number && index) {
                 const res = await axios.get(`https://api.secretspage.com/api/user/page?n=${number}&i=${index}`);
                 localStorage.setItem('data', JSON.stringify(res.data));
-                var arrMessage = res.data.message.split('\\n');
-
+                var arrMessage = res.data.message.split('\n');
                 arrMessage.forEach((item, index) => {
                     $('#message').append(`<span class="say">${item}</span><br>`);
                 });
